@@ -1,6 +1,7 @@
 package com.imooc.service.impl;
 
 import com.imooc.dataobject.ProductInfo;
+import com.imooc.service.ProductService;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -20,26 +21,26 @@ import java.util.List;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class ProductInfoServiceImplTest {
+public class ProductServiceImplTest {
     @Autowired
-    private ProductInfoServiceImpl productInfoService;
+    private ProductService productService;
     
     @Test
     public void findOne() throws Exception {
-        ProductInfo productInfo = productInfoService.findOne("123456");
+        ProductInfo productInfo = productService.findOne("123456");
         Assert.assertEquals("123456",productInfo.getProductId());
     }
 
     @Test
     public void findUpALl() throws Exception {
-        List<ProductInfo> productInfoList = productInfoService.findUpALl();
+        List<ProductInfo> productInfoList = productService.findUpALl();
         Assert.assertEquals(0,productInfoList.size());
     }
 
     @Test
     public void findAll() throws Exception {
         Pageable pageable = PageRequest.of(0,2);
-        Page<ProductInfo> all = productInfoService.findAll(pageable);
+        Page<ProductInfo> all = productService.findAll(pageable);
         Assert.assertNotEquals(0,all.getTotalElements());
     }
 
@@ -55,7 +56,7 @@ public class ProductInfoServiceImplTest {
         productInfo.setProductStatus(0);
         productInfo.setProductType(2);
 
-        ProductInfo result = productInfoService.save(productInfo);
+        ProductInfo result = productService.save(productInfo);
         Assert.assertNotNull(result);
     }
 

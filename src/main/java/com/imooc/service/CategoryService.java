@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by dell on 2019/1/11.
  */
-public interface ProductCategoryService {
+public interface CategoryService {
     ProductCategory findOne(Integer categoryId);
 
     List<ProductCategory> findAll();

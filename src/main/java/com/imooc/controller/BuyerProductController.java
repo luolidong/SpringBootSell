@@ -5,8 +5,9 @@ import com.imooc.VO.ProductVO;
 import com.imooc.VO.ResultVO;
 import com.imooc.dataobject.ProductCategory;
 import com.imooc.dataobject.ProductInfo;
-import com.imooc.service.impl.ProductCategoryServiceImpl;
-import com.imooc.service.impl.ProductInfoServiceImpl;
+import com.imooc.service.CategoryService;
+import com.imooc.service.ProductService;
+import com.imooc.utils.RusultVOUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,15 +28,15 @@ import java.util.stream.Collectors;
 public class BuyerProductController {
 
     @Autowired
-    private ProductInfoServiceImpl productInfoService;
+    private ProductService productService;
 
     @Autowired
-    private ProductCategoryServiceImpl productCategoryService;
+    private CategoryService categoryService;
 
     @GetMapping("/list")
     public ResultVO list() {
         //1.查询所有的上架商品
-        List<ProductInfo> productInfoList = productInfoService.findUpALl();
+        List<ProductInfo> productInfoList = productService.findUpALl();
 
         //2.查询类目（一次性查询）
 //        List<Integer> categoryTypeList = new ArrayList<>();
@@ -48,7 +49,7 @@ public class BuyerProductController {
         List<Integer> categoryTypeList = productInfoList.stream()
                 .map(e->e.getProductType()).collect(Collectors.toList());
 
-        List<ProductCategory> productCategoryList = productCategoryService.findByCategoryTypeIn(categoryTypeList);
+        List<ProductCategory> productCategoryList = categoryService.findByCategoryTypeIn(categoryTypeList);
 
         //3.数据拼装
         List<ProductVO> productVOList = new ArrayList<>();
@@ -71,11 +72,6 @@ public class BuyerProductController {
             productVOList.add(productVO);
         }
 
-        ResultVO resultVO = new ResultVO();
-        resultVO.setCode(0);
-        resultVO.setMsg("success");
-
-        resultVO.setData(productVOList);
-        return resultVO;
+        return RusultVOUtil.success(productVOList);
     }
 }
