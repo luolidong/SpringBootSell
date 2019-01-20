@@ -81,8 +81,7 @@ public class OrderServiceImpl implements OrderService{
         orderMasterRepository.save(orderMaster);
 
         //4. 扣库存
-        List<CartDTO> cartDTOList = new ArrayList<>();
-        orderDTO.getOrderDetailList().stream().map(e ->
+        List<CartDTO> cartDTOList = orderDTO.getOrderDetailList().stream().map(e ->
                 new CartDTO(e.getProductId(), e.getProductQuantity())
         ).collect(Collectors.toList());
 
