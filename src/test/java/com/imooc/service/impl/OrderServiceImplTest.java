@@ -4,6 +4,7 @@ import com.imooc.dataobject.OrderDetail;
 import com.imooc.dto.OrderDTO;
 import com.imooc.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +26,8 @@ public class OrderServiceImplTest {
 
     private final String BUYER_OPENID = "110110";
 
+    private final String ORDER_ID = "1547557279586954509";
+
     @Test
     public void create() throws Exception {
         OrderDTO orderDTO = new OrderDTO();
@@ -45,14 +48,18 @@ public class OrderServiceImplTest {
 
         OrderDTO result = orderService.create(orderDTO);
         log.info("[创建订单] result = {}", result);
+        Assert.assertNotNull(result);
     }
 
     @Test
     public void findOne() throws Exception {
+        OrderDTO result = orderService.findOne(ORDER_ID);
+        Assert.assertEquals(ORDER_ID, result.getOrderId());
     }
 
     @Test
     public void findAll() throws Exception {
+
     }
 
     @Test

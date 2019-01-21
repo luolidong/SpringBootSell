@@ -63,7 +63,7 @@ public class ProductServiceImpl implements ProductService {
                 throw new SellException(ResultEnum.PRODUCT_STOCK_ERROR);
             }
 
-            productInfo.setProductType(result);
+            productInfo.setProductStock(result);
 
             repository.save(productInfo);
         }
