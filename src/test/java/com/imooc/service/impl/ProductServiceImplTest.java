@@ -22,6 +22,8 @@ import java.util.List;
 @RunWith(SpringRunner.class)
 @SpringBootTest
 public class ProductServiceImplTest {
+
+
     @Autowired
     private ProductService productService;
     
@@ -58,6 +60,14 @@ public class ProductServiceImplTest {
 
         ProductInfo result = productService.save(productInfo);
         Assert.assertNotNull(result);
+    }
+
+    @Test
+    public void increaseStock() throws Exception {
+    }
+
+    @Test
+    public void decreaseStock() throws Exception {
     }
 
 }
