@@ -5,7 +5,7 @@ import com.imooc.VO.ResultVO;
 /**
  * Created by dell on 2019/1/14.
  */
-public class RusultVOUtil {
+public class ResultVOUtil {
     public static ResultVO success(Object object) {
         ResultVO resultVO = new ResultVO();
         resultVO.setData(object);
